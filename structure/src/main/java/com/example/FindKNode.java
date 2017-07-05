@@ -17,7 +17,46 @@ package com.example;
 
 public class FindKNode {
 
+    public static void main(String args[]) {
+        //头节点
+        Node head = null;
+        //当前节点
+        Node curNode = null;
+        for (int i = 0; i < 10; i++) {
+            if (i != 0) {
+                Node node = new Node(i + 1);
+                curNode.setNext(node);
+                curNode = node;
+            } else {
+                head = new Node(i);
+                curNode = new Node(i + 1);
+                head.setNext(curNode);
+            }
 
+        }
+        Node kNode = findKNode(head,5);
+        System.out.println("倒数第K个节点是："+kNode.getData());
+    }
+
+    public static Node findKNode(Node head, int k) {
+        if (head == null || k < 1) {
+            return null;
+        }
+        Node firstNode = head;
+        Node secondNode = head;
+        for (int i = 0; i < k - 1; i++) {
+            if (firstNode.next != null) {
+                firstNode = firstNode.next;
+            } else {
+                return null;
+            }
+        }
+        while (firstNode.next != null) {
+            firstNode = firstNode.next;
+            secondNode = secondNode.next;
+        }
+        return secondNode;
+    }
 
 
 }
